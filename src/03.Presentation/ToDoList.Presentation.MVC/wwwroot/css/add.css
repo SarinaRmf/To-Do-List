@@ -1,0 +1,112 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    font-family: "Jost", sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url("../images/wallhaven-498e2w_1920x1080.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 500px;
+    border-radius: 20px;
+    box-shadow: 0 0 100px rgba(0,0,0,0.5);
+    border: 3px solid rgba(255, 255, 255, 0.18);
+    padding: 15px 5px;
+    background: rgba(255, 255, 255, 0.2); /* سفید نیمه شفاف */
+    backdrop-filter: blur(10px); /* افکت بلور */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* حاشیه شفاف */
+}
+
+.form-input {
+    margin: 10px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+    .form-input input {
+        width: 100%;
+        padding: 10px 5px;
+        box-shadow: 0 0 100px rgba(0,0,0,0.5);
+        border: 3px solid rgba(255, 255, 255, 0.18);
+        border-radius: 20px;
+        gap: 5px;
+        flex: 1; /* هر فرم ورودی فضای مساوی بگیره */
+        background: rgba(255, 255, 255, 0.2); /* سفید نیمه شفاف */
+        backdrop-filter: blur(10px); /* افکت بلور */
+        border: 1px solid rgba(255, 255, 255, 0.3); /* حاشیه شفاف */
+    }
+
+    .task-title textarea,
+    .form-input select {
+        width: 100%;
+        padding: 10px 5px;
+        box-shadow: 0 0 100px rgba(0,0,0,0.5);
+        border: 3px solid rgba(255, 255, 255, 0.18);
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.2); /* سفید نیمه شفاف */
+        backdrop-filter: blur(10px); /* افکت بلور */
+        border: 1px solid rgba(255, 255, 255, 0.3); /* حاشیه شفاف */
+    }
+
+    .form-input label {
+        white-space: nowrap; /* جلوگیری از شکستن متن به خط بعد */
+        margin-right: 5px;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+.task-title textarea {
+    height: 80px;
+}
+
+.task-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+#add-task-btn {
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 0 100px rgba(0,0,0,0.5);
+    border: 3px solid rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.2); /* سفید نیمه شفاف */
+    backdrop-filter: blur(10px); /* افکت بلور */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* حاشیه شفاف */
+
+    flex-shrink: 0; /**/
+}
+
+    #add-task-btn:hover {
+        background-color: #ed9082;
+        scale: 1.09;
+    }
+.message-box {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #dc2626;
+    text-align: center;
+}

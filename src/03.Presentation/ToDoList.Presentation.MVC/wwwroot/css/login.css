@@ -1,0 +1,117 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    font-family: "Jost", sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("../images/wallhaven-498e2w_1920x1080.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.form-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 450px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.3);
+    border-radius: 20px;
+    padding: 20px 5px;
+    /* برای بلوری و شیشه ای کردن فرم از چت جی پی تی کمک گرفتم*/
+    background: rgba(255, 255, 255, 0.2); /* سفید نیمه شفاف */
+    backdrop-filter: blur(10px); /* افکت بلور */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* حاشیه شفاف */
+}
+
+    .form-area h1 {
+        margin-bottom: 30px;
+        color: white;
+    }
+
+.form-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+    .form-row input {
+        width: 100%;
+        padding: 10px 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 5px 0 rgba(0,0,0,0.3);
+        border: none;
+        flex: 2 0 200px;
+        background: rgba(255, 255, 255, 0.2); /* سفید نیمه شفاف */
+        backdrop-filter: blur(10px); /* افکت بلور */
+        border: 1px solid rgba(255, 255, 255, 0.3); /* حاشیه شفاف */
+    }
+
+.form-input label {
+    color: white;
+}
+
+.form-area button {
+    width: 100%;
+    padding: 10px 5px;
+    margin-bottom: 8px;
+    border-radius: 15px;
+    color: white;
+    font-weight: 900px;
+    font-size: 18px;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    background: rgba(255, 255, 255, 0.2); /* سفید نیمه شفاف */
+    backdrop-filter: blur(10px); /* افکت بلور */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* حاشیه شفاف */
+}
+
+    .form-area button:hover {
+        transform: scale(1.1);
+        background-color: #ff826f;
+    }
+
+.form-input p {
+    color: white;
+}
+
+.form-input a {
+    text-decoration: none;
+    color: #ff826f;
+    font-weight: 500;
+    transition: transform 0.2s, font-size 0.2s;
+    display: inline-block; /**/
+}
+.form-input a:hover {
+    transform: scale(1.1);
+}
+.message-box {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #dc2626;
+    text-align: center;
+}

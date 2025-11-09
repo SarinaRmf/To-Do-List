@@ -1,0 +1,55 @@
+﻿@using ToDoList.Domain.Core.DTOs.ToDoItem
+@model List<GetItemsDto>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/todolist.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" 
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <div class="to-do-container">
+            <h1>To-Do List</h1>
+            <div class="to-do-list">
+                <div class="add-to-List">
+                    <a asp-action="Add"><button>Add to list</button></a>
+                </div>
+                @foreach(var item in Model)
+                {
+                    <ul>
+                    <div class="to-do-items">
+                        <li>
+                            <div class="task-info">
+                                <div class="task-title">
+                                    <span><b>@item.Title</b></span>
+                                </div>
+                                <div class="task-details">
+                                    <span class="task-date">Due Date: @item.DueTime</span>
+                                    <span class="task-category">Category: @item.CategoryName</span>
+                                    <span class="task-status">Status: @item.Status</span>
+                                </div>
+                            </div>
+                            <div class="task-buttons">
+                                <a asp-action="Edit" asp-route-itemId="@item.Id"><button class="edit-btn"><i class="fa-solid fa-pen-to-square"></i></button></a>
+                                <a asp-action="Delete" asp-route-itemId="@item.Id" ><button class="delete-btn"><i class="fa-solid fa-trash"></i></button></a>
+                            </div>
+                        </li>
+                        
+                    </div>
+                </ul>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

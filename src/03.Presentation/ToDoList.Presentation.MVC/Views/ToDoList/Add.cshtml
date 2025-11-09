@@ -1,0 +1,58 @@
+﻿@using ToDoList.Domain.Core.DTOs.Category
+@using ToDoList.Domain.Core.DTOs.ToDoItem
+@model CreateItemDto
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/add.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" 
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <h1>Add task to your list</h1>
+        <form asp-action="Add" method = "post" class="task-form">
+            <div class="task-title">
+                <div class="form-input">
+                    <label asp-for="Title">Task</label>
+                    <textarea asp-for="Title" rows="5" cols="40">Type your task here...</textarea>
+                </div>
+            </div>
+
+            <div class="task-details">
+                <div class="form-input">
+                    <label asp-for="DueTime">Due Date</label>
+                    <input asp-for="DueTime">
+                </div>
+
+                <div class="form-input">
+                    <label asp-for="CategoryId">Category</label>
+                    <select asp-for="CategoryId">
+                    @foreach(var item in (List<GetCategoryDto>)ViewBag.Categories)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                    </select>
+                </div>
+
+                <button type="submit" id="add-task-btn"><i class="fa-solid fa-plus"></i></button>
+            </div>
+
+        </form>
+        <div class ="message-box">
+            <p>
+                @ViewBag.LoginError
+            </p>
+        </div>
+    </div>
+</body>
+</html>
