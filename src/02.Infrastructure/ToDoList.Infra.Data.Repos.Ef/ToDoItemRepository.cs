@@ -89,10 +89,10 @@ namespace ToDoList.Infra.Data.Repos.Ef
             {
                 _context.ToDoList
                .Where(i => i.Id == itemId)
-               .ExecuteUpdateAsync(setters => setters
+               .ExecuteUpdate(setters => setters
                    .SetProperty(i => i.DueTime, ItemDto.DueTime)
                    .SetProperty(i => i.Title, ItemDto.Title)
-                   .SetProperty(i => i.CategoryId, ItemDto.Id)
+                   .SetProperty(i => i.CategoryId, ItemDto.CategoryId)
                    .SetProperty(i => i.Status, ItemDto.Status)
                    .SetProperty(i => i.UptatedAt, DateTime.Now));
                 return true;
