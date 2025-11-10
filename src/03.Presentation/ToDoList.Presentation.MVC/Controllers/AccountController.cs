@@ -49,6 +49,10 @@ namespace ToDoList.Presentation.MVC.Controllers
 
                 return RedirectToAction("Login");
             }
+            else
+            {
+                ViewBag.LoginError = result.Message;
+            }
 
             return View(model);
         }

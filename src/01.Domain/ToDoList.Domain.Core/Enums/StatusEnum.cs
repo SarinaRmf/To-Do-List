@@ -8,8 +8,8 @@ namespace ToDoList.Domain.Core.Enums
 {
     public enum StatusEnum
     {
-        Done,
-        InProgress,
-        Delayed
+        Done = 0,
+        InProgress = 1,
+        Delayed = 2,
     }
 }

@@ -36,7 +36,19 @@
                                 <div class="task-details">
                                     <span class="task-date">Due Date: @item.DueTime</span>
                                     <span class="task-category">Category: @item.CategoryName</span>
-                                    <span class="task-status">Status: @item.Status</span>
+                                        @if (item.Status == ToDoList.Domain.Core.Enums.StatusEnum.Delayed)
+                                        {
+                                             <span class="task-status">Status:<span style="color: Red"> @item.Status</span></span>
+                                        }
+                                        @if(item.Status == ToDoList.Domain.Core.Enums.StatusEnum.Done)
+                                        {
+                                             <span class="task-status">Status:<span style="color: Green"> @item.Status</span></span>
+                                        }
+                                        @if(item.Status == ToDoList.Domain.Core.Enums.StatusEnum.InProgress)
+                                        {
+                                            <span class="task-status">Status:<span style="color: Blue"> @item.Status</span></span>
+                                        }
+                                        
                                 </div>
                             </div>
                             <div class="task-buttons">

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ToDoList.Domain.Core.Contracts.Repository;
 using ToDoList.Domain.Core.DTOs.ToDoItem;
 using ToDoList.Domain.Core.Entities;
+using ToDoList.Domain.Core.Enums;
 using ToDoList.Infra.Db.SqlServer.Ef;
 
 namespace ToDoList.Infra.Data.Repos.Ef
@@ -63,6 +64,8 @@ namespace ToDoList.Infra.Data.Repos.Ef
 
                 }).ToList();
         }
+
+
         public UpdateItemDto? GetUpdateItems(int itemId)
         {
             return _context.ToDoList
@@ -102,6 +105,35 @@ namespace ToDoList.Infra.Data.Repos.Ef
                 return false;
             }
             
+        }
+
+        public bool OverDue(int itemId)
+        {
+            return _context.ToDoList.Any(i => i.Id == itemId
+            && i.DueTime< DateTime.Now);
+        }
+
+        public bool UpdateStatus(int itemId, StatusEnum Status) {
+
+            try
+            {
+                _context.ToDoList
+               .Where(i => i.Id == itemId)
+               .ExecuteUpdate(setters => setters
+                   .SetProperty(i => i.Status, Status));
+                return true;
+            }
+            catch
+            {
+
+                return false;
+            }
+        }
+        public StatusEnum GetStatus(int itemId) { 
+        
+            return _context.ToDoList.Where(i => i.Id ==itemId)
+                .Select(i => i.Status)
+                .FirstOrDefault();
         }
     }
 }

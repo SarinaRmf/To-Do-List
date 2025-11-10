@@ -69,5 +69,23 @@ namespace ToDoList.Domain.Services
             }
             return new ResultDto<bool>() { IsSuccess = false, Message = "Editing Task failed!" };
         }
+
+        public ResultDto<bool> SetOverDueStatus(int itemId)
+        {
+            if (_repo.GetStatus(itemId) == Core.Enums.StatusEnum.Done)
+            {
+                return new ResultDto<bool> { IsSuccess = false };
+            }
+            if (_repo.OverDue(itemId))
+            {
+                var result = _repo.UpdateStatus(itemId, Core.Enums.StatusEnum.Delayed);
+                if (result)
+                {
+                    return new ResultDto<bool>() { IsSuccess = true };
+                }
+                return new ResultDto<bool>() { IsSuccess = false, Message = "Updating Status failed!" };
+            }
+            return new ResultDto<bool>() { IsSuccess = false, Message = "Has't reach to deadline!" };
+        }
     }
 }

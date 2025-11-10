@@ -46,6 +46,11 @@
                 <button type="submit">Register</button>
                 <p>Already have an account? <a asp-action="Login">Login</a></p>
             </form>
+            <div class ="message-box">
+            <p>
+                @ViewBag.LoginError
+            </p>
+        </div>
         </div>
     </div>
 </body>

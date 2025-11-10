@@ -12,6 +12,14 @@ namespace ToDoList.Presentation.MVC.Controllers
         {
             var onlineUser = InMemoryDb.OnlineUser;
             var model = toDoListService.GetAll(onlineUser.Id);
+            foreach(var item in model)
+            {
+                var status = toDoListService.SetOverDueStatus(item.Id);
+                if (status.IsSuccess == false)
+                {
+                    ViewBag.Error = status.Message;
+                }
+            }
             return View(model);
         }
 

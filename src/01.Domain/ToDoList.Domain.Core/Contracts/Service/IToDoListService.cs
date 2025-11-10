@@ -16,5 +16,6 @@ namespace ToDoList.Domain.Core.Contracts.Service
         ResultDto<bool> Update(int itemId, UpdateItemDto ItemDto);
         ResultDto<bool> Delete(int itemId);
         UpdateItemDto GetUpdateItems(int itemId);
+        public ResultDto<bool> SetOverDueStatus(int itemId);
     }
 }

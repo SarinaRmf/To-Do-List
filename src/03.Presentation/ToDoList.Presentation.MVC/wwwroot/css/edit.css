@@ -102,3 +102,9 @@ textarea {
         background-color: #ed9082;
         scale: 1.09;
     }
+.message-box {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #dc2626;
+    text-align: center;
+}
