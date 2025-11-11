@@ -8,12 +8,13 @@ using ToDoList.Domain.Core.Enums;
 
 namespace ToDoList.Domain.Core.DTOs.ToDoItem
 {
-    public class GetItemsDto
+    public class CreateItemDto
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public DateTime DueTime { get; set; }
-        public string CategoryName{ get; set; }
+        public int CategoryId { get; set; }
         public StatusEnum Status { get; set; }
+        public int UserId { get; set; }
+        public string? DueTimeFa { get; set; }
     }
 }

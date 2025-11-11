@@ -13,5 +13,6 @@ namespace ToDoList.Domain.Core.Contracts.Repository
         bool Register(CreateUserDto userDto);
         bool UsernameExist(string username);
 
+
     }
 }

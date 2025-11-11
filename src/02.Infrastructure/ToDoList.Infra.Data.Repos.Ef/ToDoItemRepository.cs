@@ -110,7 +110,7 @@ namespace ToDoList.Infra.Data.Repos.Ef
         public bool OverDue(int itemId)
         {
             return _context.ToDoList.Any(i => i.Id == itemId
-            && i.DueTime< DateTime.Now);
+            && i.DueTime< DateTime.Now && i.Status == StatusEnum.InProgress);
         }
 
         public bool UpdateStatus(int itemId, StatusEnum Status) {

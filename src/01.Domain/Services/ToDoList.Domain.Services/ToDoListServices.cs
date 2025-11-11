@@ -7,6 +7,8 @@ using ToDoList.Domain.Core.Contracts.Repository;
 using ToDoList.Domain.Core.Contracts.Service;
 using ToDoList.Domain.Core.DTOs.common;
 using ToDoList.Domain.Core.DTOs.ToDoItem;
+using ToDoList.Domain.Core.Enums;
+using ToDoList.framework;
 
 namespace ToDoList.Domain.Services
 {
@@ -14,22 +16,23 @@ namespace ToDoList.Domain.Services
     {
         public ResultDto<bool> Add(CreateItemDto createItemDto)
         {
-            if(string.IsNullOrEmpty(createItemDto.Title))
+            if (string.IsNullOrEmpty(createItemDto.Title))
             {
                 return new ResultDto<bool>() { IsSuccess = false, Message = "Task title is required!" };
-            } 
+            }
 
             var result = _repo.Add(createItemDto);
-            if(result)
+            if (result)
             {
-                return new ResultDto<bool>() { IsSuccess = true, Message ="Task Successfully added." };
+                return new ResultDto<bool>() { IsSuccess = true, Message = "Task Successfully added." };
             }
             return new ResultDto<bool>() { IsSuccess = false, Message = "Adding Task failed!" };
         }
 
         public ResultDto<bool> Delete(int itemId)
         {
-            if (!_repo.IsExist(itemId)){
+            if (!_repo.IsExist(itemId))
+            {
                 return new ResultDto<bool>() { IsSuccess = false, Message = "Task not found!" };
             }
             var result = _repo.Delete(itemId);
@@ -72,10 +75,6 @@ namespace ToDoList.Domain.Services
 
         public ResultDto<bool> SetOverDueStatus(int itemId)
         {
-            if (_repo.GetStatus(itemId) == Core.Enums.StatusEnum.Done)
-            {
-                return new ResultDto<bool> { IsSuccess = false };
-            }
             if (_repo.OverDue(itemId))
             {
                 var result = _repo.UpdateStatus(itemId, Core.Enums.StatusEnum.Delayed);
@@ -85,7 +84,9 @@ namespace ToDoList.Domain.Services
                 }
                 return new ResultDto<bool>() { IsSuccess = false, Message = "Updating Status failed!" };
             }
-            return new ResultDto<bool>() { IsSuccess = false, Message = "Has't reach to deadline!" };
+            return new ResultDto<bool>() { IsSuccess = false};
         }
     }
 }
+
+ 

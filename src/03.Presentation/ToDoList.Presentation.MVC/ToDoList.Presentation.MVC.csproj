@@ -14,8 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\01.Domain\ToDoList.Domain.Services\ToDoList.Domain.Services.csproj" />
+    <ProjectReference Include="..\..\01.Domain\Services\ToDoList.Domain.ApplicationServices\ToDoList.Domain.ApplicationServices.csproj" />
     <ProjectReference Include="..\..\02.Infrastructure\ToDoList.Infra.Data.Repos.Ef\ToDoList.Infra.Data.Repos.Ef.csproj" />
+    <ProjectReference Include="..\..\02.Infrastructure\ToDoList.Infra.Db.SqlServer.Ef\ToDoList.Infra.Db.SqlServer.Ef.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToDoList.Domain.Core.DTOs.common;
 using ToDoList.Domain.Core.DTOs.ToDoItem;
 using ToDoList.Domain.Core.Enums;
 
@@ -20,5 +21,6 @@ namespace ToDoList.Domain.Core.Contracts.Repository
         bool OverDue(int itemId);
         bool UpdateStatus(int itemId, StatusEnum Status);
         StatusEnum GetStatus(int itemId);
+
     }
 }

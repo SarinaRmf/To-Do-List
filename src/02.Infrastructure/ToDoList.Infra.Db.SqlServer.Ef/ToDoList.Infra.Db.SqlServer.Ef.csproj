@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\01.Domain\ToDoList.Domain.Core\ToDoList.Domain.Core.csproj" />
+    <ProjectReference Include="..\..\01.Domain\Core\ToDoList.Domain.Core\ToDoList.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>

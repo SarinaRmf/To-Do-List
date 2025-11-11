@@ -1,20 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ToDoList.Domain.Core.Contracts.ApplicationService;
 using ToDoList.Domain.Core.Contracts.Service;
+using ToDoList.Domain.Core.DTOs.common;
 using ToDoList.Domain.Core.DTOs.ToDoItem;
 using ToDoList.Presentation.MVC.Database;
 using ToDoList.Presentation.MVC.Models;
 
 namespace ToDoList.Presentation.MVC.Controllers
 {
-    public class ToDoListController(IToDoListService toDoListService, ICategoryService categoryService) : Controller
+    public class ToDoListController(IToDoListApplicationService toDoListApp) : Controller
     {
         public IActionResult Index()
         {
             var onlineUser = InMemoryDb.OnlineUser;
-            var model = toDoListService.GetAll(onlineUser.Id);
+            var model = toDoListApp.GetAll(onlineUser.Id);
             foreach(var item in model)
             {
-                var status = toDoListService.SetOverDueStatus(item.Id);
+                var status = toDoListApp.SetOverDueStatus(item.Id);
                 if (status.IsSuccess == false)
                 {
                     ViewBag.Error = status.Message;
@@ -26,14 +28,17 @@ namespace ToDoList.Presentation.MVC.Controllers
         [HttpGet]
         public IActionResult Add() {
 
-            ViewBag.Categories = categoryService.GetAll();
+            var onlineUser = InMemoryDb.OnlineUser;
+            var pageData = toDoListApp.GetPageData(onlineUser.Id);
+            ViewBag.Categories = pageData.Categories;
+
             return View(new CreateItemDto());
         }
 
         [HttpPost]
         public IActionResult Add(CreateItemDto model) {
             model.UserId = InMemoryDb.OnlineUser.Id;
-            var result = toDoListService.Add(model);
+            var result = toDoListApp.Add(model);
             if (result.IsSuccess)
             {
                 return RedirectToAction("Index");
@@ -45,7 +50,7 @@ namespace ToDoList.Presentation.MVC.Controllers
         [HttpGet]
         public IActionResult Delete(int itemId)
         {
-            var result = toDoListService.Delete(itemId);
+            var result = toDoListApp.Delete(itemId);
             if (result.IsSuccess) { 
             
                 return RedirectToAction("Index");
@@ -60,14 +65,17 @@ namespace ToDoList.Presentation.MVC.Controllers
         [HttpGet]
         public IActionResult Edit(int itemId) {
 
-            ViewBag.Categories = categoryService.GetAll();
-            var model = toDoListService.GetUpdateItems(itemId);
+            var onlineUser = InMemoryDb.OnlineUser;
+            var pageData = toDoListApp.GetPageData(onlineUser.Id);
+            ViewBag.Categories = pageData.Categories;
+
+            var model = toDoListApp.GetUpdateItems(itemId);
             return View(model);
         }
         [HttpPost]
         public IActionResult Edit(UpdateItemDto model) {
 
-            var result = toDoListService.Update(model.Id, model);
+            var result = toDoListApp.Update(model.Id, model);
             if (result.IsSuccess) { 
             
                 return RedirectToAction("Index");

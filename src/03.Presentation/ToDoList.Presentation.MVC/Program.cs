@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using ToDoList.Domain.ApplicationServices;
+using ToDoList.Domain.Core.Contracts.ApplicationService;
 using ToDoList.Domain.Core.Contracts.Repository;
 using ToDoList.Domain.Core.Contracts.Service;
 using ToDoList.Domain.Services;
@@ -21,12 +23,16 @@ namespace ToDoList.Presentation.MVC
 
             builder.Services.AddScoped<IUserService, UserServices>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IUserApplicationService, UserApplicationServices>();
 
             builder.Services.AddScoped<IToDoItemRepository, ToDoItemRepository>();
             builder.Services.AddScoped<IToDoListService, ToDoListServices>();
+            builder.Services.AddScoped<IToDoListApplicationService, ToDoListApplicationServices>();
 
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
             builder.Services.AddScoped<ICategoryService, CategoryServices>();
+            builder.Services.AddScoped<ICategoryApplicationService, CategoryApplicationServices>();
+
 
             var app = builder.Build();
 

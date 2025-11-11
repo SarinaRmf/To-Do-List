@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ToDoList.Domain.Core.DTOs.Category;
 
-namespace ToDoList.Domain.Core.Contracts.Service
+namespace ToDoList.Domain.Core.Contracts.ApplicationService
 {
-    public interface ICategoryService
+    public interface ICategoryApplicationService
     {
         List<GetCategoryDto> GetAll();
     }

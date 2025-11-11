@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ToDoList.Domain.Core.Contracts.ApplicationService;
 using ToDoList.Domain.Core.Contracts.Service;
 using ToDoList.Domain.Core.DTOs.User;
 using ToDoList.Presentation.MVC.Database;
@@ -6,7 +7,7 @@ using ToDoList.Presentation.MVC.Models;
 
 namespace ToDoList.Presentation.MVC.Controllers
 {
-    public class AccountController(IUserService userServices) : Controller
+    public class AccountController(IUserApplicationService userApp) : Controller
     {
         public IActionResult Index()
         {
@@ -20,7 +21,7 @@ namespace ToDoList.Presentation.MVC.Controllers
         [HttpPost]
         public IActionResult Login(LoginViewModel model)
         {
-            var result = userServices.Login(model.Username, model.Password);
+            var result = userApp.Login(model.Username, model.Password);
             if (result.IsSuccess)
             {
                 InMemoryDb.OnlineUser = new OnlineUser
@@ -44,7 +45,7 @@ namespace ToDoList.Presentation.MVC.Controllers
         [HttpPost]
         public IActionResult Register(CreateUserDto model)
         {
-            var result = userServices.Register(model);
+            var result = userApp.Register(model);
             if (result.IsSuccess) {
 
                 return RedirectToAction("Login");
