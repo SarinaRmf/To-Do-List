@@ -60,6 +60,10 @@ namespace ToDoList.Domain.ApplicationServices
         }
         public List<GetItemsDto> Filter(SearchModel model, int userId)
         {
+            if(model.SortBy == null && model.Title == null && model.CategoryName == null)
+            {
+                return toDoListService.GetAll(userId);
+            }
             var searchResult = toDoListService.Search(userId, model);
             return toDoListService.Sort(searchResult, model);
         }
