@@ -26,6 +26,28 @@
                 <div class="add-to-List">
                     <a asp-action="Add" style="text-decoration: none;"><button>Add to list</button></a>
                 </div>
+               <div class="Filter">
+                   <form asp-action="Filter" method="post" class="filter-form">
+                        <div class="search">
+                            <input name="Title" type="text" placeholder="Search by title...">
+                        </div>
+
+                        <div class="search">
+                            <input name="CategoryName" type="text" placeholder="Search by category...">
+                        </div>
+
+                        <div class="sort">
+                            <select name="SortBy" id="sort-select">
+                                <option value="" disabled selected>Sort by...</option>
+                                <option value="Title">Title</option>
+                                <option value="DueDate">Due Date</option>
+                                <option value="Status">Status</option>
+                            </select>
+                        </div>
+
+                        <button class="apply-btn" type="submit">Apply</button>
+                    </form>
+                </div>
                 @foreach(var item in Model)
                 {
                     <ul>

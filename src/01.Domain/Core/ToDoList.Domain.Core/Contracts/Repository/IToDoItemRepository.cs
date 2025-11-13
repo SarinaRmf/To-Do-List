@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ToDoList.Domain.Core.DTOs.common;
 using ToDoList.Domain.Core.DTOs.ToDoItem;
+using ToDoList.Domain.Core.Entities;
 using ToDoList.Domain.Core.Enums;
 
 namespace ToDoList.Domain.Core.Contracts.Repository
@@ -21,6 +22,7 @@ namespace ToDoList.Domain.Core.Contracts.Repository
         bool OverDue(int itemId);
         bool UpdateStatus(int itemId, StatusEnum Status);
         StatusEnum GetStatus(int itemId);
-
+        IQueryable<ToDoItem> Search(int userId, SearchModel model);
+        List<GetItemsDto> Sort(IQueryable<ToDoItem> query, SearchModel model);
     }
 }

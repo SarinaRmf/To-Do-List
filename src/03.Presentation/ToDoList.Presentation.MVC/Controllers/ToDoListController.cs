@@ -3,6 +3,7 @@ using ToDoList.Domain.Core.Contracts.ApplicationService;
 using ToDoList.Domain.Core.Contracts.Service;
 using ToDoList.Domain.Core.DTOs.common;
 using ToDoList.Domain.Core.DTOs.ToDoItem;
+using ToDoList.Domain.Core.Enums;
 using ToDoList.Presentation.MVC.Database;
 using ToDoList.Presentation.MVC.Models;
 
@@ -14,7 +15,8 @@ namespace ToDoList.Presentation.MVC.Controllers
         {
             var onlineUser = InMemoryDb.OnlineUser;
             var model = toDoListApp.GetAll(onlineUser.Id);
-            foreach(var item in model)
+
+            foreach (var item in model)
             {
                 var status = toDoListApp.SetOverDueStatus(item.Id);
                 if (status.IsSuccess == false)
@@ -81,6 +83,15 @@ namespace ToDoList.Presentation.MVC.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Filter(SearchModel model)
+        {
+            var onlineUser = InMemoryDb.OnlineUser;
+            
+            var searchResult = toDoListApp.Filter(model, onlineUser.Id);
+            return View("Index", searchResult);
         }
     }
 }

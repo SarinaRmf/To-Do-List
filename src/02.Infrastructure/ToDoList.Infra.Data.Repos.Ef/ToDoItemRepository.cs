@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ToDoList.Domain.Core.Contracts.Repository;
+using ToDoList.Domain.Core.DTOs.common;
 using ToDoList.Domain.Core.DTOs.ToDoItem;
 using ToDoList.Domain.Core.Entities;
 using ToDoList.Domain.Core.Enums;
 using ToDoList.Infra.Db.SqlServer.Ef;
+
 
 namespace ToDoList.Infra.Data.Repos.Ef
 {
@@ -134,6 +136,50 @@ namespace ToDoList.Infra.Data.Repos.Ef
             return _context.ToDoList.Where(i => i.Id ==itemId)
                 .Select(i => i.Status)
                 .FirstOrDefault();
+        }
+
+        public IQueryable<ToDoItem> Search(int userId,SearchModel model)
+        {
+            var result = _context.ToDoList.AsQueryable();
+            if(model.Title != null)
+            {
+                result = _context.ToDoList.Where(i => i.UserId == userId && (i.Title.Contains(model.Title)));
+                
+            }
+            if (model.CategoryName != null) { 
+                
+                result = _context.ToDoList.Where(i => i.Category.Name == model.CategoryName);
+            
+            }
+            return result;
+
+        }
+
+        public List<GetItemsDto> Sort(IQueryable<ToDoItem> query, SearchModel model)
+        {
+
+            if (model.SortBy == "DueDate")
+            {
+                query = query.OrderBy(x => x.DueTime);
+            }
+            else if (model.SortBy == "Status")
+            {
+                query = query.OrderBy(x => x.Status);
+            }
+            else if (model.SortBy == "Title")
+            {
+                query =  query.OrderBy(x => x.Title);
+            }
+
+            return query.Select(x => new GetItemsDto
+            {
+                Title = x.Title,
+                Status = x.Status,
+                DueTime = x.DueTime,
+                Id = x.Id,
+                CategoryName = x.Category.Name,
+            }).ToList();
+
         }
     }
 }

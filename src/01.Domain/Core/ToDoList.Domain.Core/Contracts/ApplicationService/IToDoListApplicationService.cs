@@ -16,7 +16,8 @@ namespace ToDoList.Domain.Core.Contracts.ApplicationService
         ResultDto<bool> Update(int itemId, UpdateItemDto ItemDto);
         ResultDto<bool> Delete(int itemId);
         UpdateItemDto GetUpdateItems(int itemId);
-        public ResultDto<bool> SetOverDueStatus(int itemId);
-        public ToDoCategoryDto GetPageData(int userId);
+       ResultDto<bool> SetOverDueStatus(int itemId);
+        ToDoCategoryDto GetPageData(int userId);
+        List<GetItemsDto> Filter(SearchModel model, int userId);
     }
 }

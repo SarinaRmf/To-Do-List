@@ -7,6 +7,7 @@ using ToDoList.Domain.Core.Contracts.ApplicationService;
 using ToDoList.Domain.Core.Contracts.Service;
 using ToDoList.Domain.Core.DTOs.common;
 using ToDoList.Domain.Core.DTOs.ToDoItem;
+using ToDoList.Domain.Core.Entities;
 
 namespace ToDoList.Domain.ApplicationServices
 {
@@ -56,6 +57,11 @@ namespace ToDoList.Domain.ApplicationServices
             };
 
             return dto;
+        }
+        public List<GetItemsDto> Filter(SearchModel model, int userId)
+        {
+            var searchResult = toDoListService.Search(userId, model);
+            return toDoListService.Sort(searchResult, model);
         }
     }
 }

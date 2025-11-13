@@ -7,6 +7,7 @@ using ToDoList.Domain.Core.Contracts.Repository;
 using ToDoList.Domain.Core.Contracts.Service;
 using ToDoList.Domain.Core.DTOs.common;
 using ToDoList.Domain.Core.DTOs.ToDoItem;
+using ToDoList.Domain.Core.Entities;
 using ToDoList.Domain.Core.Enums;
 using ToDoList.framework;
 
@@ -86,6 +87,15 @@ namespace ToDoList.Domain.Services
             }
             return new ResultDto<bool>() { IsSuccess = false};
         }
+        public IQueryable<ToDoItem> Search(int userId, SearchModel model)
+        {
+            return _repo.Search(userId, model);
+        }
+        public List<GetItemsDto> Sort(IQueryable<ToDoItem> query,SearchModel model)
+        {
+            return _repo.Sort(query, model);
+        }
+
     }
 }
 
