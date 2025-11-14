@@ -19,7 +19,7 @@ namespace ToDoList.Presentation.MVC
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer("Data Source=localhost\\SQLEXPRESS;Initial Catalog=HW19;User ID=sa;Password=Az@r4180;Trust Server Certificate=True "));
+                options.UseSqlServer(" "));
 
             builder.Services.AddScoped<IUserService, UserServices>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
