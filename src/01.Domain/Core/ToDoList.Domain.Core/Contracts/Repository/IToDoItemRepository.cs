@@ -22,7 +22,8 @@ namespace ToDoList.Domain.Core.Contracts.Repository
         bool OverDue(int itemId);
         bool UpdateStatus(int itemId, StatusEnum Status);
         StatusEnum GetStatus(int itemId);
-        IQueryable<ToDoItem> Search(int userId, SearchModel model);
-        List<GetItemsDto> Sort(IQueryable<ToDoItem> query, SearchModel model);
+        List<GetItemsDto> SearchAndSort(int userId, SearchModel model);
+        //IQueryable<ToDoItem> Search(int userId, SearchModel model);
+        //List<GetItemsDto> Sort(IQueryable<ToDoItem> query, SearchModel model);
     }
 }

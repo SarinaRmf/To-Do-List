@@ -20,7 +20,8 @@ namespace ToDoList.Domain.Core.Contracts.Service
         UpdateItemDto GetUpdateItems(int itemId);
         public ResultDto<bool> SetOverDueStatus(int itemId);
 
-        public IQueryable<ToDoItem> Search(int userId, SearchModel model);
-        public List<GetItemsDto> Sort(IQueryable<ToDoItem> query, SearchModel model);
+        //public IQueryable<ToDoItem> Search(int userId, SearchModel model);
+        //public List<GetItemsDto> Sort(IQueryable<ToDoItem> query, SearchModel model);
+        List<GetItemsDto> Filter(SearchModel model, int userId);
     }
 }

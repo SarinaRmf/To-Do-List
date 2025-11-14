@@ -87,15 +87,11 @@ namespace ToDoList.Domain.Services
             }
             return new ResultDto<bool>() { IsSuccess = false};
         }
-        public IQueryable<ToDoItem> Search(int userId, SearchModel model)
-        {
-            return _repo.Search(userId, model);
-        }
-        public List<GetItemsDto> Sort(IQueryable<ToDoItem> query,SearchModel model)
-        {
-            return _repo.Sort(query, model);
-        }
 
+        public List<GetItemsDto> Filter(SearchModel model, int userId)
+        {
+            return _repo.SearchAndSort(userId, model);
+        }
     }
 }
 

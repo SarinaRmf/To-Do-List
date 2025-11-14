@@ -131,55 +131,87 @@ namespace ToDoList.Infra.Data.Repos.Ef
                 return false;
             }
         }
-        public StatusEnum GetStatus(int itemId) { 
-        
-            return _context.ToDoList.Where(i => i.Id ==itemId)
+        public StatusEnum GetStatus(int itemId)
+        {
+
+            return _context.ToDoList.Where(i => i.Id == itemId)
                 .Select(i => i.Status)
                 .FirstOrDefault();
         }
-
-        public IQueryable<ToDoItem> Search(int userId,SearchModel model)
+        public List<GetItemsDto> SearchAndSort(int userId, SearchModel model)
         {
-            var result = _context.ToDoList.AsQueryable();
-            if(model.Title != null)
-            {
-                result = _context.ToDoList.Where(i => i.UserId == userId && (i.Title.Contains(model.Title)));
-                
-            }
-            if (model.CategoryName != null) { 
-                
-                result = _context.ToDoList.Where(i => i.Category.Name == model.CategoryName);
+            var query = _context.ToDoList
+                .Where(i => i.UserId == userId)
+                .AsQueryable();
+
             
-            }
-            return result;
+            if (!string.IsNullOrEmpty(model.Title))
+                query = query.Where(i => i.Title.Contains(model.Title));
 
-        }
+            
+            if (!string.IsNullOrEmpty(model.CategoryName))
+                query = query.Where(i => i.Category.Name == model.CategoryName);
 
-        public List<GetItemsDto> Sort(IQueryable<ToDoItem> query, SearchModel model)
-        {
-
-            if (model.SortBy == "DueDate")
+            query = model.SortBy switch
             {
-                query = query.OrderBy(x => x.DueTime);
-            }
-            else if (model.SortBy == "Status")
-            {
-                query = query.OrderBy(x => x.Status);
-            }
-            else if (model.SortBy == "Title")
-            {
-                query =  query.OrderBy(x => x.Title);
-            }
+                "DueDate" => query.OrderBy(x => x.DueTime),
+                "Status" => query.OrderBy(x => x.Status),
+                "Title" => query.OrderBy(x => x.Title),
+                _ => query.OrderBy(x => x.Id) // مرتب‌سازی پیش‌فرض
+            };
 
+            
             return query.Select(x => new GetItemsDto
             {
                 Title = x.Title,
                 Status = x.Status,
                 DueTime = x.DueTime,
                 Id = x.Id,
-                CategoryName = x.Category.Name,
+                CategoryName = x.Category.Name
             }).ToList();
-
         }
+        //public IQueryable<ToDoItem> Search(int userId,SearchModel model)
+        //{
+        //    var result = _context.ToDoList.Where(i=> i.UserId == userId).AsQueryable();
+        //    if(model.Title != null)
+        //    {
+        //        result = _context.ToDoList.Where(i => i.Title.Contains(model.Title));
+
+        //    }
+        //    if (model.CategoryName != null) { 
+
+        //        result = _context.ToDoList.Where(i => i.Category.Name == model.CategoryName);
+
+        //    }
+        //    return result;
+
+        //}
+
+        //public List<GetItemsDto> Sort(IQueryable<ToDoItem> query, SearchModel model)
+        //{
+
+        //    if (model.SortBy == "DueDate")
+        //    {
+        //        query = query.OrderBy(x => x.DueTime);
+        //    }
+        //    else if (model.SortBy == "Status")
+        //    {
+        //        query = query.OrderBy(x => x.Status);
+        //    }
+        //    else if (model.SortBy == "Title")
+        //    {
+        //        query =  query.OrderBy(x => x.Title);
+        //    }
+
+        //    return query.Select(x => new GetItemsDto
+        //    {
+        //        Title = x.Title,
+        //        Status = x.Status,
+        //        DueTime = x.DueTime,
+        //        Id = x.Id,
+        //        CategoryName = x.Category.Name,
+        //    }).ToList();
+
+        //}
     }
 }
